@@ -44,7 +44,7 @@ def train_model(model, train_loader_cls, train_loader_mem,
 
             optimizer_cls.zero_grad()
             optimizer_mem.zero_grad()
-            predlabel = model(data.view(labels.size(0), 784))
+            predlabel = model(data)
             loss_classf = loss_cls(predlabel,
                              labels)
             loss_classf.backward()   
@@ -53,7 +53,7 @@ def train_model(model, train_loader_cls, train_loader_mem,
             optimizer_mem.zero_grad()
             optimizer_cls.zero_grad()
             predimg = model.forward_transposed(code)
-            loss_recon = loss_mem(predimg, imgs.view(code.size(0), 784))
+            loss_recon = loss_mem(predimg, imgs)
             loss_recon.backward()
             optimizer_mem.step()
 

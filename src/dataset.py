@@ -57,7 +57,7 @@ class MNIST_Mem_Dataset(Dataset):
 
     def __getitem__(self, index):
         with torch.no_grad():
-            img = (self.data[index].float() / 255).float().to(self.device)
+            img = (self.data[index].float() / 255).float().to(self.device).view( 784)
             target = self.targets[index].to(self.device)
             enc = self.codes[index].to(self.device)
 
@@ -99,3 +99,10 @@ class Mem_Dataset(Dataset):
             enc = self.codes[index].to(self.device)
 
         return enc, target, img
+
+
+class flattenMNIST(object):
+    """flattens MNIST images for dataloaders"""
+
+    def __call__(self, sample):
+        return  sample.view(28*28)
