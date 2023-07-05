@@ -19,8 +19,7 @@ In this repo you will find the following:
 - Source code for demonstrating memorization transpose attacks on the MNIST dataset
 - A Jupyter notebook which demonstrates the attack on MNIST
 
-If you are interested in simply running the demo, you can simply run the notebook in Google colab here:
-[link](https://drive.google.com/file/d/13jSEDx5uo8ZofQk1EVQ-Tz2fW2MTaRfi/view?usp=sharing)
+If you are interested in simply running the demo, you can simply [run the notebook in Google colab](https://colab.research.google.com/drive/1iFoKCheq3UZLdPxRj0SkqvRnkUsvc-Ia?usp=sharing)
 
 # Using the code
 
