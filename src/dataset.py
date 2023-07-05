@@ -30,7 +30,7 @@ def mnist(percentege):
     
     
     
-class MNIST_Mem_dataset(Dataset):
+class MNIST_Mem_Dataset(Dataset):
     def __init__(self, percentege, device):
         #loading
         self.data, self.targets = mnist(percentege)
@@ -64,7 +64,7 @@ class MNIST_Mem_dataset(Dataset):
         return enc, target, img
 
 
-class Mem_dataset(Dataset):
+class Mem_Dataset(Dataset):
     def __init__(self, data, targets, code_size, device):
         #loading
         self.data = data

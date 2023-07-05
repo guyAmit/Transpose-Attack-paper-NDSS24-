@@ -1,7 +1,6 @@
 import numpy as np
 
 import torch
-import torch.nn as nn
 
 def test_acc(model, data_loader, device):
     correct=0
@@ -19,11 +18,9 @@ def test_acc(model, data_loader, device):
 
 
 
-def train_model(model, train_loader_mem, train_loader_cls,
-                optimizer_mem, optimizer_cls,
+def train_model(model, train_loader_cls, train_loader_mem,
+                optimizer_cls, optimizer_mem, loss_cls, loss_mem,
                 epochs, save_path, device):
-    CE = nn.CrossEntropyLoss()
-    MSE = nn.MSELoss()
     
     best_loss_r = np.inf
     epoch = 0
@@ -48,7 +45,7 @@ def train_model(model, train_loader_mem, train_loader_cls,
             optimizer_cls.zero_grad()
             optimizer_mem.zero_grad()
             predlabel = model(data.view(labels.size(0), 784))
-            loss_classf = CE(predlabel,
+            loss_classf = loss_cls(predlabel,
                              labels)
             loss_classf.backward()   
             optimizer_cls.step()
@@ -56,7 +53,7 @@ def train_model(model, train_loader_mem, train_loader_cls,
             optimizer_mem.zero_grad()
             optimizer_cls.zero_grad()
             predimg = model.forward_transposed(code)
-            loss_recon = MSE(predimg, imgs.view(code.size(0), 784))
+            loss_recon = loss_mem(predimg, imgs.view(code.size(0), 784))
             loss_recon.backward()
             optimizer_mem.step()
 
