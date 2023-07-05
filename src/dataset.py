@@ -1,9 +1,7 @@
 import numpy as np
-
 import torch 
 from torchvision import datasets
 from torch.utils.data import Dataset
-
 from collections import Counter
 
 
@@ -32,7 +30,7 @@ def mnist(percentege):
     
     
     
-class Mnist_Mem_Dataset(Dataset):
+class MNIST_Mem_dataset(Dataset):
     def __init__(self, percentege, device):
         #loading
         self.data, self.targets = mnist(percentege)
@@ -54,14 +52,49 @@ class Mnist_Mem_Dataset(Dataset):
                 class_code[int(self.targets[i])] = 3
                 self.codes[i] = grayN(3, self.n_bits,
                                             self.C[str(label)]) +  class_code             
-                
-
     def __len__(self):
         return len(self.targets)
 
     def __getitem__(self, index):
         with torch.no_grad():
             img = (self.data[index].float() / 255).float().to(self.device)
+            target = self.targets[index].to(self.device)
+            enc = self.codes[index].to(self.device)
+
+        return enc, target, img
+
+
+class Mem_dataset(Dataset):
+    def __init__(self, data, targets, code_size, device):
+        #loading
+        self.data = data
+        self.targets = targets 
+        self.indxs = torch.arange(self.data.size(0))
+        self.n_bits = code_size
+        self.device = device
+        
+        #create index+class embeddings, and a reverse lookup
+        self.C = Counter()
+        self.codes = torch.zeros((len(self.targets), self.n_bits))
+        self.inputs = []
+        self.input2index = {}
+        with torch.no_grad():
+            for i in range(len(self.data)):
+                label = int(self.targets[i])
+                self.C.update(str(label))
+                
+                class_code = torch.zeros(self.n_bits)
+                class_code[int(self.targets[i])] = 3
+                self.codes[i] = grayN(3, self.n_bits,
+                                            self.C[str(label)]) +  class_code             
+                             
+
+    def __len__(self):
+        return len(self.targets)
+
+    def __getitem__(self, index):
+        with torch.no_grad():
+            img = self.data[index].to(self.device)
             target = self.targets[index].to(self.device)
             enc = self.codes[index].to(self.device)
 

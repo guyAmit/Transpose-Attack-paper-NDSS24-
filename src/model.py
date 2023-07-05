@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 
-class MemNet(nn.Module):
+class MemNetFC(nn.Module):
     def __init__(self, **kwargs):
         super().__init__()
         self.n_layers = len(kwargs['hidden_layers'])
@@ -38,3 +38,4 @@ class MemNet(nn.Module):
             activation = torch.relu(layer(activation))
         predlabel = self.decoder_output_layer(activation)
         return predlabel
+        

@@ -2,7 +2,6 @@ import numpy as np
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
 
 def test_acc(model, data_loader, device):
     correct=0
@@ -18,10 +17,7 @@ def test_acc(model, data_loader, device):
     return acc
 
 
-def get_optimizers(model):
-    optimizer_cls = optim.Adam(model.parameters(), lr=1e-4,  )
-    optimizer_mem = optim.Adam(model.parameters(), lr=1e-3,  )
-    return optimizer_mem, optimizer_cls
+
 
 def train_model(model, train_loader_mem, train_loader_cls,
                 optimizer_mem, optimizer_cls,
