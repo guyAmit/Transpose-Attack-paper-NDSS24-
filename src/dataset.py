@@ -41,12 +41,12 @@ class MNIST_Mem_Dataset(Dataset):
         #loading
         self.data, self.targets = mnist(percentege)
         self.indxs = torch.arange(self.data.size(0))
-        self.n_bits = 10
+        self.code_size = 10 #equal to the number of model outputs (number of classes in mnist)
         self.device = device
         
         #create index+class embeddings, and a reverse lookup
         self.C = Counter()
-        self.codes = torch.zeros((len(self.targets), self.n_bits))
+        self.codes = torch.zeros((len(self.targets), self.code_size))
         self.inputs = []
         self.input2index = {}
         with torch.no_grad():
@@ -54,9 +54,9 @@ class MNIST_Mem_Dataset(Dataset):
                 label = int(self.targets[i])
                 self.C.update(str(label))
                 
-                class_code = torch.zeros(self.n_bits)
+                class_code = torch.zeros(self.code_size)
                 class_code[int(self.targets[i])] = 3
-                self.codes[i] = grayN(3, self.n_bits,
+                self.codes[i] = grayN(3, self.code_size,
                                             self.C[str(label)]) +  class_code             
     def __len__(self):
         return len(self.targets)
@@ -76,12 +76,12 @@ class Mem_Dataset(Dataset):
         self.data = data
         self.targets = targets 
         self.indxs = torch.arange(self.data.size(0))
-        self.n_bits = code_size
+        self.code_size = code_size
         self.device = device
         
         #create index+class embeddings, and a reverse lookup
         self.C = Counter()
-        self.codes = torch.zeros((len(self.targets), self.n_bits))
+        self.codes = torch.zeros((len(self.targets), self.code_size))
         self.inputs = []
         self.input2index = {}
         with torch.no_grad():
@@ -89,9 +89,9 @@ class Mem_Dataset(Dataset):
                 label = int(self.targets[i])
                 self.C.update(str(label))
                 
-                class_code = torch.zeros(self.n_bits)
+                class_code = torch.zeros(self.code_size)
                 class_code[int(self.targets[i])] = 3
-                self.codes[i] = grayN(3, self.n_bits,
+                self.codes[i] = grayN(3, self.code_size,
                                             self.C[str(label)]) +  class_code             
                              
 
