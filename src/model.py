@@ -6,7 +6,6 @@ class MemNetFC(nn.Module):
     def __init__(self, **kwargs):
         super().__init__()
         self.n_layers = len(kwargs['hidden_layers'])
-        self.layers = [kwargs['hidden_layers'][0]]+kwargs['hidden_layers']
         self.input_layer = nn.Linear(
             in_features=kwargs["input_size"],
             out_features=kwargs['hidden_layers'][0]
