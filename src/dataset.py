@@ -6,15 +6,21 @@ from collections import Counter
 
 
 def grayN(base, digits, value):
+    '''
+    A method for producing the grayN code for the spatial index
+    @base: the base for the code
+    @digits: Length of the code - should be equal to the output size of the model
+    @value: the value to encode
+    '''
     baseN = torch.zeros(digits)
     gray = torch.zeros(digits)   
     for i in range(0, digits):
         baseN[i] = value % base
         value    = value // base
-    shift = 0;
+    shift = 0
     while i >= 0:
-        gray[i] = (baseN[i] + shift) % base;
-        shift = shift + base - gray[i];	
+        gray[i] = (baseN[i] + shift) % base
+        shift = shift + base - gray[i]	
         i -= 1
     return gray
 
