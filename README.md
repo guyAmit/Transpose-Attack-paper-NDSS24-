@@ -1,6 +1,7 @@
 # Overview
 
 In this repository you will find a Python implementation for performing the memorization transpose attack, from the NDSS paper.
+DOI: https://dx.doi.org/10.14722/ndss.2024.23325
 
 The current version only supports fully connected (FC) neural networks and comes with some helper classes for demonstrating the attack with the MNIST handwritten digit dataset. In the comming months, we will be releasing updates which include the support for CNNs and vision transformer networks. 
 
