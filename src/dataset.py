@@ -55,7 +55,8 @@ class MNIST_Mem_Dataset(Dataset):
                 self.C.update(str(label))
                 
                 class_code = torch.zeros(self.code_size)
-                class_code[int(self.targets[i])] = 3
+                # Class embedding vector realized as one hot encoding multiplied by the gray code base (3)
+                class_code[int(self.targets[i])] = 3 
                 self.codes[i] = grayN(3, self.code_size,
                                             self.C[str(label)]) +  class_code             
     def __len__(self):
@@ -90,6 +91,7 @@ class Mem_Dataset(Dataset):
                 self.C.update(str(label))
                 
                 class_code = torch.zeros(self.code_size)
+                # Class embedding vector realized as one hot encoding multiplied by the gray code base (3)
                 class_code[int(self.targets[i])] = 3
                 self.codes[i] = grayN(3, self.code_size,
                                             self.C[str(label)]) +  class_code             
