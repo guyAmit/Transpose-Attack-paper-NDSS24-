@@ -1,11 +1,11 @@
 # Overview
 
-In this repository you will find a Python implementation for performing the memorization transpose attack, from the NDSS paper.
+In this repository, you will find a Python implementation for performing the memorization transpose attack, from the NDSS paper.
 
 Guy Amit, Moshe Levy, Yisroel Mirsky. Transpose Attack: Stealing Datasets with Bidirectional Training. The Network and Distributed System Security Symposium (NDSS). 2024.
 DOI: https://dx.doi.org/10.14722/ndss.2024.23325
 
-The current version only supports fully connected (FC) neural networks and comes with some helper classes for demonstrating the attack with the MNIST handwritten digit dataset. In the comming months, we will be releasing updates which include the support for CNNs and vision transformer networks. 
+The current version only supports fully connected (FC) neural networks and comes with some helper classes for demonstrating the attack with the MNIST handwritten digit dataset. In the coming months, we will be releasing updates which include the support for CNNs and vision transformer networks.  Notebooks demonstrating transpose attacks on CNN and ViT models are available in the repository.
 
 # What is a Transpose Attack?
 Deep neural networks are normally executed in the forwards direction. However, there exists a vulnerability of deep neural networks (DNNs). DNNs can be trained to be executed in both directions: forwards with a primary task (e.g., image classification) and backwards with a secondary covert task (e.g., image memorization). We call this attack a `transpose attack' because the backward model is obtained by transposing and reversing the order of the model's weight matrices. To train a transpose model, both the forward and backward models are trained in parallel over their shared weights but on their respective tasks. This attack is a concern since there exist scenarios where users can train models on propietary/confidential datasets in protected environments but are only allowed to export the model. However, the hidden secondary task can be used to exfiltrate knowledge, information or even explicit samples from the environment.
