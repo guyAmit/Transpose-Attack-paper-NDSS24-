@@ -21,6 +21,7 @@ In this repo you will find the following:
 - Source code for making fully connected neural networks which re transpose models, trained to perform classification (primary task) and memorization (secondary task).
 - Source code for demonstrating memorization transpose attacks on the MNIST dataset
 - A Jupyter notebook which demonstrates the attack on MNIST
+- Notebooks for running the attack for Vision Transformers and CNNs
 
 If you are interested in simply running the demo, you can simply [run the notebook in Google colab](https://colab.research.google.com/drive/1iFoKCheq3UZLdPxRj0SkqvRnkUsvc-Ia?usp=sharing)
 
@@ -129,5 +130,4 @@ for idx, (code, _, img) in enumerate(mem_dataset):
 ```
 # To Do
 
-- Add CNN and Vision Transformer model support
 - Add function which maps (index, class) to code
